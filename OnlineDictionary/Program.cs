@@ -1,7 +1,12 @@
+using OnlineDictionary.API.Repositories;
+using OnlineDictionary.API.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<ILangugageRepository, LanguageRepository>();
+builder.Services.AddTransient<ILangugageService, LanguageSevice>();
 
 var app = builder.Build();
 
@@ -15,6 +20,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 
 app.UseRouting();
 
