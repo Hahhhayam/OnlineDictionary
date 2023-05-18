@@ -10,7 +10,8 @@ namespace OnlineDictionary.API.Repositories
         void Delete(int id);
         List<Language> GetAll();
         Language GetById(int id);
-        void Update(int id, UpdateLanguageDTO language);
+        void Update(int id, UpdateLanguageDTO language); 
+        Language GetByName(string name);
     }
     public class LanguageRepository : ILangugageRepository
     {
@@ -55,6 +56,13 @@ namespace OnlineDictionary.API.Repositories
             if (dto.Name != null) { langToChange.Name = dto.Name; }
             if (dto.Info != null) { langToChange.Info = dto.Info; }
             db.SaveChanges();
+        }
+        public Language GetByName(string name)
+        {
+            return db.Languages
+                .Include(x => x.DictLanguage1s).ThenInclude(x => x.Language2)
+                .Include(x => x.DictLanguage2s).ThenInclude(x => x.Language1)
+                .Single(x => x.Name == name);
         }
     }
 }

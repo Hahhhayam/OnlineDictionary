@@ -10,6 +10,8 @@ builder.Services.AddMvc();
 builder.Services.AddDbContext<OnlineDictionaryContext>();
 builder.Services.AddTransient<ILangugageRepository, LanguageRepository>();
 builder.Services.AddTransient<ILangugageService, LanguageSevice>();
+builder.Services.AddTransient<IWordRepository, WordRepository>();
+builder.Services.AddTransient<IWordService, WordService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers().AddJsonOptions(x =>
