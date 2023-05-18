@@ -29,29 +29,29 @@ namespace OnlineDictionary.API.Controllers
             return _service.GetAll();
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<Language> GetById
             (
-                [FromQuery] int id
+                int id
             )
         {
             return _service.GetById(id);
         }
 
-        [HttpPatch("/{id}")]
+        [HttpPatch("{id}")]
         public void Update
             (
-                [FromQuery] int id,
+                int id,
                 [FromBody] UpdateLanguageDTO dto
             )
         {
             _service.Update(id, dto);
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public void Delete
             (
-                [FromQuery] int id
+                int id
             )
         {
             _service.Delete(id);

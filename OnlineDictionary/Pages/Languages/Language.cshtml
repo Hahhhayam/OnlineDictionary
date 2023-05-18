@@ -1,0 +1,65 @@
+﻿@page "{id}"
+@model OnlineDictionary.Pages.Languages.LanguageModel
+@{
+}
+
+<h1> @Model.lang.Name.ToUpper() </h1>
+
+<h3> Info </h3>
+<p>@Model.lang.Info</p>
+<a href="/Languages/update/@Model.lang.Id">Redact</a>
+@if (Model.lang.DictLanguage1s.Count == 0 && Model.lang.DictLanguage2s.Count == 0)
+{
+    <br />
+    <b> or </b>
+
+    <form method="post">
+        <input type="submit" value="delete"/>
+        <%= action=""></%>
+    </form>
+
+
+}
+<h3> Connected dicts </h3>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Info</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var dict in Model.lang.DictLanguage1s)
+        {
+            <tr>
+                <td>
+                    <a class="nav-link text-blue" href="/Language/@dict.Id">@dict.Name</a>
+                </td>
+                <td>
+                    @Model.lang.Name-@dict.Language2.Name
+                </td>
+                <td>
+                    @dict.Info
+                </td>
+            </tr>
+        }
+        @foreach (var dict in Model.lang.DictLanguage2s)
+        {
+            <tr>
+                <td>
+                    <a class="nav-link text-blue" href="/Dict/@dict.Id">@dict.Name</a>
+                </td>
+                <td>
+                    @dict.Language1.Name-@Model.lang.Name
+                </td>
+                <td>
+                    @dict.Info
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

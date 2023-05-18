@@ -1,0 +1,39 @@
+﻿@page
+@model OnlineDictionary.Pages.Languages.Supported_langugagesModel
+@{
+}
+<H1>Supported langugages</H1>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Info</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var lang in Model.languages)
+        {
+            <tr>
+                <td>
+                    <a href="/Languages/Language/@lang.Id">@lang.Name.ToUpper()</a>
+                    <b>&nbsp;</b>
+                    <a href="/Languages/update/@lang.Id">red.</a>
+                    @if (lang.DictLanguage1s.Count == 0 && lang.DictLanguage2s.Count == 0)
+                    {
+                        <form method="post">
+                            <input type="hidden" name="id" value="@lang.Id">
+                            <input type="submit" value="delete"/>
+                        </form>
+                    }
+                </td>
+                <td>
+                    @lang.Info
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<a href="/Languages/create">Add language</a>

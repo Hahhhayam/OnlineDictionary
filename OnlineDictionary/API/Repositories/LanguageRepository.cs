@@ -1,4 +1,5 @@
-﻿using OnlineDictionary.API.DTO;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineDictionary.API.DTO;
 using OnlineDictionary.API.Models;
 
 namespace OnlineDictionary.API.Repositories
@@ -35,19 +36,24 @@ namespace OnlineDictionary.API.Repositories
 
         public List<Language> GetAll()
         {
-            return db.Languages.ToList();
+            return db.Languages
+                .Include(x => x.DictLanguage1s)
+                .Include(x => x.DictLanguage2s).ToList();
         }
 
         public Language GetById(int id)
         {
-            return db.Languages.Find(id);
+            return db.Languages
+                .Include(x => x.DictLanguage1s).ThenInclude(x => x.Language2)
+                .Include(x => x.DictLanguage2s).ThenInclude(x => x.Language1)
+                .Single(x => x.Id == id);
         }
 
         public void Update(int id, UpdateLanguageDTO dto)
         {
             var langToChange = GetById(id);
-            if (langToChange.Name != null) { langToChange.Name = dto.Name; }
-            if (langToChange.Info != null) { langToChange.Info = dto.Info; }
+            if (dto.Name != null) { langToChange.Name = dto.Name; }
+            if (dto.Info != null) { langToChange.Info = dto.Info; }
             db.SaveChanges();
         }
     }
