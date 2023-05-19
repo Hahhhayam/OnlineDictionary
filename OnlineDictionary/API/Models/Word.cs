@@ -9,7 +9,7 @@ public partial class Word
 
     public string Value { get; set; } = null!;
 
-    public string Info { get; set; } = null!;
+    public string? Info { get; set; }
 
     public int LanguageId { get; set; }
 
