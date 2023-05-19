@@ -7,8 +7,7 @@ namespace OnlineDictionary.API.DTO
         [Required]
         public string Value { get; set; } = null!;
 
-        [Required]
-        public string Info { get; set; }
+        public string? Info { get; set; }
 
         [Required]
         [RegularExpression(@"\A[a-z]{2}\Z")]
