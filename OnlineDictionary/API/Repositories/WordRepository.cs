@@ -6,7 +6,7 @@ namespace OnlineDictionary.API.Repositories
 {
     public interface IWordRepository
     {
-        void Create(Word dto);
+        int Create(Word dto);
         List<Word> GetAll();
         Word GetById(int id);
         List<Word> GetByLanguage(int languageId);
@@ -17,10 +17,11 @@ namespace OnlineDictionary.API.Repositories
     {
         private readonly ILangugageRepository _langRepository = new LanguageRepository();
         private readonly OnlineDictionaryContext db = new OnlineDictionaryContext();
-        public void Create(Word word)
+        public int Create(Word word)
         {
             db.Words.Add(word);
             db.SaveChanges();
+            return word.Id;
         }
 
         public void Delete(int id)
