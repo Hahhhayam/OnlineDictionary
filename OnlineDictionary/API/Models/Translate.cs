@@ -16,4 +16,5 @@ public partial class Translate
     public virtual Word Word1 { get; set; } = null!;
 
     public virtual Word Word2 { get; set; } = null!;
+    public virtual ICollection<DictsTranslate> DictsTranslates { get; set; } = new List<DictsTranslate>();
 }

@@ -10,4 +10,5 @@ public partial class DictsTranslate
     public int TranslateId { get; set; }
 
     public virtual Dict Dict { get; set; } = null!;
+    public virtual Translate Translate { get; set; } = null!;
 }
