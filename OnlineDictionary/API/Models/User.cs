@@ -15,5 +15,7 @@ namespace OnlineDictionary.API.Models
 
         [Required]
         public string Password { get; set; }
+
+        public bool IsLogined { get; set; }
     }
 }
