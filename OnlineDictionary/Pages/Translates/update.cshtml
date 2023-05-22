@@ -1,0 +1,16 @@
+﻿@page "{id}"
+@model OnlineDictionary.Pages.Translates.updateModel
+@{
+}
+
+<h1>@Model.translate.Word1.Value - @Model.translate.Word2.Value</h1>
+<h3>Info</h3>
+<p>@Model.translate.Example</p>
+<h3>Redact translate</h3>
+<form method="post">
+    <p>
+        <label>Example</label><br />
+        <input type="text" name="Example" />
+    </p>
+    <input type="submit" value="Update" />
+</form>

@@ -1,0 +1,15 @@
+﻿@page "{id}"
+@model OnlineDictionary.Pages.Words.WordModel
+@{
+}
+<h1>@Model.word.Value</h1>
+<h3>@Model.word.Language.Name</h3>
+<h3>@Model.word.Info</h3>
+
+@if (Model.isLogged)
+{
+    <a href="../update/@Model.word.Id">redact</a>
+    <form method="post">
+        <input type="submit" value="delete" />
+    </form>
+}

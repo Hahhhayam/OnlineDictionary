@@ -7,19 +7,20 @@
 
 <h3> Info </h3>
 <p>@Model.lang.Info</p>
-<a href="/Languages/update/@Model.lang.Id">Redact</a>
-@if (Model.lang.DictLanguage1s.Count == 0 && Model.lang.DictLanguage2s.Count == 0)
+@if (Model.isLogged)
 {
-    <br />
-    <b> or </b>
+    <a href="/Languages/update/@Model.lang.Id">Redact</a>
+    @if (Model.lang.DictLanguage1s.Count == 0 && Model.lang.DictLanguage2s.Count == 0)
+    {
+        <br />
+        <b> or </b>
 
-    <form method="post">
-        <input type="submit" value="delete"/>
-        <%= action=""></%>
-    </form>
-
-
+        <form method="post">
+            <input type="submit" value="delete" />
+        </form>
+    }
 }
+
 <h3> Connected dicts </h3>
 <table class="table">
 
@@ -50,7 +51,7 @@
         {
             <tr>
                 <td>
-                    <a class="nav-link text-blue" href="/Dict/@dict.Id">@dict.Name</a>
+                    <a class="nav-link text-blue" href="/Dicts/@dict.Id">@dict.Name</a>
                 </td>
                 <td>
                     @dict.Language1.Name-@Model.lang.Name
@@ -63,3 +64,12 @@
     </tbody>
 
 </table>
+@foreach (var word in Model.words) 
+{
+    <a href="../../Words/Word/@word.Id">@word.Value</a>
+    <b>&nbsp;</b>
+}
+@if (Model.isLogged)
+{
+    <a href="../../Words/Manage/">Manage words</a>
+}

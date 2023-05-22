@@ -32,12 +32,12 @@ namespace OnlineDictionary.API.Repositories
 
         public List<Word> GetAll()
         {
-            return db.Words.ToList();
+            return db.Words.Include(x => x.Language).ToList();
         }
 
         public Word GetById(int id)
         {
-            return db.Words.Single(x => x.Id == id);
+            return db.Words.Include(x => x.Language).Single(x => x.Id == id);
         }
 
         public List<Word> GetByLanguage(int languageId)
@@ -54,8 +54,8 @@ namespace OnlineDictionary.API.Repositories
                 var langId = _langRepository.GetByName(dto.LanguageName).Id;
                 word.LanguageId = langId;
             }
-            if (dto.Value != null) { word.Value = dto.Value; }
-            if (dto.Info != null) { word.Info = dto.Info; }
+            if (!string.IsNullOrEmpty(dto.Value)) { word.Value = dto.Value; }
+            if (!string.IsNullOrEmpty(dto.Info)) { word.Info = dto.Info; }
             db.SaveChanges();
         }
     }

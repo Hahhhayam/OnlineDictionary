@@ -1,0 +1,71 @@
+﻿@page
+@model OnlineDictionary.Pages.Translates.TranslatesModel
+@{
+}
+<h1>Translates</h1>
+
+<form method="post">
+    <label for="langs">Choose a lang 1:</label>
+    <select name="langName1">
+        @foreach (var lang in Model.supportLanguages)
+        {
+            <option value="@lang.Name">@lang.Name</option>
+        }
+    </select>
+    <label for="langs">Choose a lang 2:</label>
+    <select name="langName2">
+        @foreach (var lang in Model.supportLanguages)
+        {
+            <option value="@lang.Name">@lang.Name</option>
+        }
+    </select>
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Word</th>
+            <th>Translate</th>
+            <th>Example</th>
+            @if (Model.isLogged)
+            {
+                <th>Do</th>
+            }
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var translate in Model.givenTranslates)
+        {
+            <tr>
+                <td>
+                    <a>@translate.Word1.Value</a>
+                </td>
+                <td>
+                    <a>@translate.Word2.Value</a>
+                </td>
+                <td>
+                    <a>@translate.Example</a>
+                </td>
+                @if (Model.isLogged)
+                {
+                    <td>
+                        <a href="update/@translate.Id">red.</a>
+                        <b>&nbsp;</b>
+                        <form asp-page-handler="delete" method="post">
+                            <input type="hidden" name="id" value="@translate.Id">
+                            <input type="submit" value="del." />
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.isLogged)
+{
+    <a href="create">Add translates and word</a>
+}

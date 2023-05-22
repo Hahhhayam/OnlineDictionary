@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineDictionary.API.DTO;
 using OnlineDictionary.API.Models;
-using OnlineDictionary.API.Repositories;
 using OnlineDictionary.API.Services;
 
 namespace OnlineDictionary.API.Controllers

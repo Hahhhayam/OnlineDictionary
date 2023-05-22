@@ -1,0 +1,39 @@
+﻿@page
+@model OnlineDictionary.Pages.Words.ManageModel
+@{
+}
+<H1>Delete words</H1>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Value</th>
+            <th>LangName</th>
+            <th>Do</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var word in Model.words)
+        {
+            <tr>
+                <td>
+                    <a>@word.Value.ToUpper()</a>
+                </td>
+                <td>
+                    @word.Language.Name
+                </td>
+                <td>
+                    <a href="../update/@word.Id">red.</a>
+                    <b>&nbsp;</b>
+                    <form method="post">
+                        <input type="hidden" name="id" value="@word.Id">
+                        <input type="submit" value="del."/>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<a href="../create">Add word</a>

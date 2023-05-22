@@ -19,13 +19,19 @@
                 <td>
                     <a href="/Languages/Language/@lang.Id">@lang.Name.ToUpper()</a>
                     <b>&nbsp;</b>
-                    <a href="/Languages/update/@lang.Id">red.</a>
-                    @if (lang.DictLanguage1s.Count == 0 && lang.DictLanguage2s.Count == 0)
+                    @if (Model.isLogged)
                     {
-                        <form method="post">
-                            <input type="hidden" name="id" value="@lang.Id">
-                            <input type="submit" value="delete"/>
-                        </form>
+                        <a href="/Languages/update/@lang.Id">red.</a>
+                    }
+                    @if (lang.DictLanguage1s.Count == 0 && lang.DictLanguage2s.Count == 0) 
+                    {
+                        @if (Model.isLogged)
+                        {
+                            <form method="post">
+                                <input type="hidden" name="id" value="@lang.Id">
+                                <input type="submit" value="delete" />
+                            </form>
+                        }
                     }
                 </td>
                 <td>
@@ -36,4 +42,7 @@
     </tbody>
 
 </table>
-<a href="/Languages/create">Add language</a>
+@if (Model.isLogged)
+{
+    <a href="/Languages/create">Add language</a>
+}
