@@ -25,6 +25,8 @@ public partial class OnlineDictionaryContext : DbContext
 
     public virtual DbSet<Word> Words { get; set; }
 
+    public virtual DbSet<User> Users { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("Host=localhost;Database=onlineDictionary;Username=postgres;Password=22698534418;Include Error Detail=True");
 
