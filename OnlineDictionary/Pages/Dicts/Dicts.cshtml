@@ -1,0 +1,49 @@
+﻿@page 
+@model OnlineDictionary.Pages.Dicts.DictsModel
+@{
+}
+<h1>Dicts</h1>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Info</th>
+            @if (Model.isLogged)
+            {
+                <th>Do</th>
+            }
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var dict in Model.dicts)
+        {
+            <tr>
+                <td>
+                    <a href="Dict/@dict.Id">@dict.Name</a>
+                </td>
+                <td>
+                    <a>@dict.Info</a>
+                </td>
+                @if (Model.isLogged)
+                {
+                    <td>
+                        <a href="update/@dict.Id">red.</a>
+                        <b>&nbsp;</b>
+                        <form method="post">
+                            <input type="hidden" name="id" value="@dict.Id">
+                            <input type="submit" value="del." />
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.isLogged)
+{
+    <a href="create">Add dict</a>
+}

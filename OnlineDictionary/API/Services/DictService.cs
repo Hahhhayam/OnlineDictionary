@@ -19,9 +19,11 @@ namespace OnlineDictionary.API.Services
     public class DictService: IDictService
     {
         private readonly IDictRepository _dictRepo;
-        public DictService(IDictRepository dictRepository)
+        private readonly ILangugageRepository _langRepo;
+        public DictService(IDictRepository dictRepository, ILangugageRepository langugageRepository)
         {
             _dictRepo = dictRepository;
+            _langRepo = langugageRepository;
         }
 
         public void AddTranslate(int id, int translId)
@@ -38,7 +40,15 @@ namespace OnlineDictionary.API.Services
 
         public void Create(CreateDictDTO dto)
         {
-            _dictRepo.Create(dto);
+            var lanId1 = _langRepo.GetByName(dto.Language1Name).Id;
+            var lanId2 = _langRepo.GetByName(dto.Language2Name).Id;
+            _dictRepo.Create(new Dict 
+            {
+                Name = dto.Name,
+                Info = dto.Info,
+                Language1Id = lanId1,
+                Language2Id = lanId2
+            });
         }
 
         public void Delete(int id)

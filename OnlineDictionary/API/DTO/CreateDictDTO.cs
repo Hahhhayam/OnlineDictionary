@@ -12,9 +12,11 @@ namespace OnlineDictionary.API.DTO
         public string? Info { get; set; }
         
         [Required]
-        public int Language1Id { get; set; }
+        [RegularExpression(@"\A[a-z]{2}\Z")]
+        public string Language1Name { get; set; } = null!;
 
         [Required]
-        public int Language2Id { get; set; }
+        [RegularExpression(@"\A[a-z]{2}\Z")]
+        public string Language2Name { get; set; } = null!;
     }
 }

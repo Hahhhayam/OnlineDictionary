@@ -6,7 +6,7 @@ namespace OnlineDictionary.API.Repositories
 {
     public interface IDictRepository 
     {
-        void Create(CreateDictDTO dto);
+        void Create(Dict dto);
         List<Dict> GetAll();
         Dict GetById(int id);
         void AddTranslates(int id, List<int> translates);
@@ -33,17 +33,11 @@ namespace OnlineDictionary.API.Repositories
             db.SaveChanges();
         }
 
-        public void Create(CreateDictDTO dto)
+        public void Create(Dict dto)
         {
             db.Dicts.Add
                 (
-                    new Dict
-                    {
-                        Name = dto.Name,
-                        Info = dto.Info,
-                        Language1Id = dto.Language1Id,
-                        Language2Id = dto.Language2Id
-                    }
+                    dto
                 );
             db.SaveChanges();
         }
@@ -59,6 +53,10 @@ namespace OnlineDictionary.API.Repositories
             return db.Dicts
                 .Include(x => x.DictsTranslates)
                 .ThenInclude(x => x.Translate)
+                .ThenInclude(x => x.Word1)
+                .Include(x => x.DictsTranslates)
+                .ThenInclude(x => x.Translate)
+                .ThenInclude(x => x.Word2)
                 .ToList();
         }
 
@@ -67,6 +65,10 @@ namespace OnlineDictionary.API.Repositories
             return db.Dicts
                 .Include(x => x.DictsTranslates)
                 .ThenInclude(x => x.Translate)
+                .ThenInclude(x => x.Word1)
+                .Include(x => x.DictsTranslates)
+                .ThenInclude(x => x.Translate)
+                .ThenInclude(x => x.Word2)
                 .Single(x => x.Id == id);
         }
 

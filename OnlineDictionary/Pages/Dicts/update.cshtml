@@ -1,0 +1,15 @@
+﻿@page "{id}"
+@model OnlineDictionary.Pages.Auth.updateModel
+@{
+}
+<h1>@Model.dict.Name</h1>
+<h3>Info</h3>
+<p>@Model.dict.Info</p>
+<h3>Redact dict</h3>
+<form method="post">
+    <p>
+        <label>Info</label><br />
+        <input type="text" name="Info" />
+    </p>
+    <input type="submit" value="Update" />
+</form>

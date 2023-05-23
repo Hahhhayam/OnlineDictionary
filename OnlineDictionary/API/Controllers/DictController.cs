@@ -53,7 +53,7 @@ namespace OnlineDictionary.API.Controllers
         public void AddTranslates
             (
                 int id,
-                [FromBody] List<TranslateDTO> translates //dto? support arrays?
+                [FromBody] List<TranslateDTO> translates
             )
         {
             _service.AddTranslates(id, translates);
@@ -79,7 +79,7 @@ namespace OnlineDictionary.API.Controllers
             _service.RemoveTranslate(id, translId);
         }
         
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public void Delete
             (
                 int id

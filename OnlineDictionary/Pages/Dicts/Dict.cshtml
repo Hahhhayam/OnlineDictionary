@@ -1,0 +1,57 @@
+﻿@page "{id}"
+@model OnlineDictionary.Pages.Dicts.DictModel
+@{
+}
+
+<h1>@Model.dict.Name</h1>
+<h3>Info</h3>
+<p>@Model.dict.Info</p>
+@if (Model.isLogged)
+{
+    <a href="../update/@Model.dict.Id">Redact</a>
+}
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Word</th>
+            <th>Translate</th>
+            <th>Example</th>
+            @if (Model.isLogged)
+            {
+                <th>Do</th>
+            }
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var dt in Model.dict.DictsTranslates)
+        {
+            <tr>
+                <td>
+                    <a>@dt.Translate.Word1.Value</a>
+                </td>
+                <td>
+                    <a>@dt.Translate.Word2.Value</a>
+                </td>
+                <td>
+                    <a>@dt.Translate.Example</a>
+                </td>
+                @if (Model.isLogged)
+                {
+                    <td>
+                        <form asp-page-handler="delete" method="post">
+                            <input type="hidden" name="idTranslate" value="@dt.Translate.Id">
+                            <input type="submit" value="del." />
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.isLogged)
+{
+    <a href="../add/@Model.dict.Id">Add translate</a>
+}
